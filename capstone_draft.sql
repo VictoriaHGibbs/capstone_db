@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXIST grub;
+CREATE DATABASE IF NOT EXISTS grub;
 USE grub;
 
 CREATE TABLE `user` (
@@ -8,7 +8,7 @@ CREATE TABLE `user` (
   `f_name` varchar(50),
   `l_name` varchar(50),
   `email_address` varchar(100) UNIQUE NOT NULL,
-  `password_hash` varbinary NOT NULL,
+  `password_hash` varbinary(60) NOT NULL,
   `joined_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_role_id` tinyint(1) NOT NULL unsigned,
   `active` boolean NOT NULL DEFAULT 1
@@ -33,13 +33,11 @@ CREATE TABLE `recipe` (
   `visibility_id` tinyint(1) NOT NULL unsigned,
 
   FULLTEXT (`recipe_title`, `description`);
-  FULLTEXT (`recipe_title`);
-  FULLTEXT (`description`);
 );
 
 CREATE TABLE `ingredient` (
   `recipe_id` int NOT NULL,
-  `ingredient_line_item` tinyint NOT NULL AUTO_INCREMENT,
+  `ingredient_line_item` tinyint NOT NULL AUTO_INCREMENT unsigned,
   `quantity` int NOT NULL unsigned,
   `ingredient_name` varchar(50) NOT NULL,
   `measurement_id` tinyint NOT NULL,
@@ -55,7 +53,7 @@ CREATE TABLE `measurement` (
 
 CREATE TABLE `direction` (
   `recipe_id` int NOT NULL,
-  `direction_line_item` tinyint NOT NULL AUTO_INCREMENT,
+  `direction_line_item` tinyint NOT NULL AUTO_INCREMENT unsigned,
   `direction_text` varchar(255) NOT NULL,
   `sort_order` tinyint DEFAULT (`direction_line_item`),
   CONSTRAINT direction_pk
@@ -73,7 +71,7 @@ CREATE TABLE `rating` (
 
 CREATE TABLE `image` (
   `recipe_id` int NOT NULL,
-  `image_line_item` tinyint NOT NULL AUTO_INCREMENT,
+  `image_line_item` tinyint NOT NULL AUTO_INCREMENT unsigned,
   `image_url` varchar(255) NOT NULL,
   `sort_order` tinyint DEFAULT (`image_line_item`),
   CONSTRAINT image_pk
@@ -145,9 +143,9 @@ ALTER TABLE `direction` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`reci
 
 ALTER TABLE `ingredient` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
 
-ALTER TABLE `measurement` ADD FOREIGN KEY (`measurement_id`) REFERENCES `ingredient` (`measurement_id`);
+ALTER TABLE `ingredient` ADD FOREIGN KEY (`measurement_id`) REFERENCES `measurement` (`measurement_id`);
 
-ALTER TABLE `role` ADD FOREIGN KEY (`user_role_id`) REFERENCES `user` (`user_role_id`);
+ALTER TABLE `user` ADD FOREIGN KEY (`user_role_id`) REFERENCES `role` (`user_role_id`);
 
 ALTER TABLE `rating` ADD FOREIGN KEY (`rater_user_id`) REFERENCES `user` (`user_id`);
 
@@ -167,9 +165,9 @@ ALTER TABLE `recipe_style` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`r
 
 ALTER TABLE `recipe_diet` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
 
-ALTER TABLE `measurement` ADD FOREIGN KEY (`measurement_id`) REFERENCES `recipe` (`yield_measurement_id`);
+ALTER TABLE `recipe` ADD FOREIGN KEY (`yield_measurement_id`) REFERENCES `measurement` (`measurement_id`);
 
-ALTER TABLE `visibility` ADD FOREIGN KEY (`visibility_id`) REFERENCES `recipe` (`visibility_id`);
+ALTER TABLE `recipe` ADD FOREIGN KEY (`visibility_id`) REFERENCES `visibility` (`visibility_id`);
 
 ALTER TABLE `comment` ADD FOREIGN KEY (`commenter_user_id`) REFERENCES `user` (`user_id`);
 
