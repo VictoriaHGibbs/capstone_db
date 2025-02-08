@@ -10,13 +10,13 @@ CREATE TABLE `user` (
   `email_address` varchar(100) UNIQUE NOT NULL,
   `password_hash` varbinary(60) NOT NULL,
   `joined_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_role_id` tinyint(1) NOT NULL,
+  `role_id` tinyint NOT NULL,
   `active` boolean NOT NULL DEFAULT 1
 );
 
 CREATE TABLE `role` (
-  `user_role_id` tinyint(1) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `user_role` varchar(10) NOT NULL
+  `role_id` tinyint PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `role` varchar(10) NOT NULL
 );
 
 CREATE TABLE `recipe` (
@@ -30,7 +30,7 @@ CREATE TABLE `recipe` (
   `yield` int UNSIGNED NOT NULL,
   `yield_measurement_id` tinyint UNSIGNED NOT NULL,
   `servings` smallint UNSIGNED NOT NULL,
-  `visibility_id` tinyint(1) UNSIGNED NOT NULL,
+  `visibility_id` tinyint UNSIGNED NOT NULL,
 
   FULLTEXT (`recipe_title`, `description`)
 );
@@ -48,7 +48,7 @@ CREATE TABLE `ingredient` (
 
 CREATE TABLE `measurement` (
   `measurement_id` tinyint UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `measurement_unit` varchar(255) NOT NULL
+  `measurement` varchar(255) NOT NULL
 );
 
 CREATE TABLE `direction` (
@@ -102,7 +102,7 @@ CREATE TABLE `recipe_style` (
 
 CREATE TABLE `style` (
   `style_id` tinyint UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `style_type` varchar(35) UNIQUE NOT NULL
+  `style` varchar(35) UNIQUE NOT NULL
 );
 
 CREATE TABLE `recipe_diet` (
@@ -118,7 +118,7 @@ CREATE TABLE `diet` (
 
 CREATE TABLE `visibility` (
   `visibility_id` tinyint UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `visibility_type` varchar(255) NOT NULL
+  `visibility` varchar(255) NOT NULL
 );
 
 CREATE TABLE `comment` (
@@ -145,7 +145,7 @@ ALTER TABLE `ingredient` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`rec
 
 ALTER TABLE `ingredient` ADD FOREIGN KEY (`measurement_id`) REFERENCES `measurement` (`measurement_id`);
 
-ALTER TABLE `user` ADD FOREIGN KEY (`user_role_id`) REFERENCES `role` (`user_role_id`);
+ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
 
 ALTER TABLE `rating` ADD FOREIGN KEY (`rater_user_id`) REFERENCES `user` (`user_id`);
 
