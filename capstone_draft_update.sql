@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS grub;
-USE grub;
+CREATE DATABASE IF NOT EXISTS victori1_grub;
+USE victori1_grub;
 
 CREATE TABLE `user` (
   `user_id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -183,13 +183,3 @@ ALTER TABLE `follow` ADD FOREIGN KEY (`following_user_id`) REFERENCES `user` (`u
 ALTER TABLE `follow` ADD FOREIGN KEY (`followed_user_id`) REFERENCES `user` (`user_id`);
 
 ALTER TABLE `video` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
-
-
-DROP USER IF EXISTS 'grubUser'@'localhost';
-
-CREATE USER grubUser@localhost
-IDENTIFIED BY 'Nomnom123!';
-
-GRANT SELECT, INSERT, DELETE, UPDATE
-ON grub.*
-TO grubUser@localhost;
