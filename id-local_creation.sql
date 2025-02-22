@@ -1,8 +1,8 @@
-CREATE DATABASE IF NOT EXISTS victori1_grub;
-USE victori1_grub;
+CREATE DATABASE IF NOT EXISTS grub2;
+USE grub2;
 
 CREATE TABLE `user` (
-  `user_id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `username` varchar(20) UNIQUE NOT NULL,
   `profile_image_url` varchar(255) DEFAULT NULL,
   `f_name` varchar(50),
@@ -20,7 +20,7 @@ CREATE TABLE `role` (
 );
 
 CREATE TABLE `recipe` (
-  `recipe_id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `user_id` int UNSIGNED NOT NULL,
   `recipe_title` varchar(100) NOT NULL,
   `prep_time_minutes` int UNSIGNED NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `recipe` (
 );
 
 CREATE TABLE `ingredient` (
-  `ingredient_id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `recipe_id` int UNSIGNED NOT NULL,
   `ingredient_line_item` tinyint UNSIGNED NOT NULL,
   `quantity` decimal(10,2) UNSIGNED NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `measurement` (
 );
 
 CREATE TABLE `direction` (
-  `direction_id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `recipe_id` int UNSIGNED NOT NULL,
   `direction_line_item` tinyint UNSIGNED NOT NULL,
   `direction_text` varchar(255) NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE `direction` (
 );
 
 CREATE TABLE `rating` (
-  `rating_id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `recipe_id` int UNSIGNED NOT NULL,
   `rater_user_id` int UNSIGNED NOT NULL,
   `rating_level` ENUM ('1', '2', '3', '4', '5') NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE `rating` (
 );
 
 CREATE TABLE `image` (
-  `image_id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `recipe_id` int UNSIGNED NOT NULL,
   `image_line_item` tinyint UNSIGNED NOT NULL,
   `image_url` varchar(255) NOT NULL,
@@ -142,23 +142,23 @@ CREATE TABLE `follow` (
 );
 
 
-ALTER TABLE `recipe` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `recipe` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `direction` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
+ALTER TABLE `direction` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`);
 
-ALTER TABLE `ingredient` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
+ALTER TABLE `ingredient` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`);
 
 ALTER TABLE `ingredient` ADD FOREIGN KEY (`measurement_id`) REFERENCES `measurement` (`measurement_id`);
 
 ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
 
-ALTER TABLE `rating` ADD FOREIGN KEY (`rater_user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `rating` ADD FOREIGN KEY (`rater_user_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `rating` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
+ALTER TABLE `rating` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`);
 
-ALTER TABLE `image` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
+ALTER TABLE `image` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`);
 
-ALTER TABLE `recipe_meal_type` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
+ALTER TABLE `recipe_meal_type` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`);
 
 ALTER TABLE `recipe_meal_type` ADD FOREIGN KEY (`meal_type_id`) REFERENCES `meal_type` (`meal_type_id`);
 
@@ -166,20 +166,30 @@ ALTER TABLE `recipe_diet` ADD FOREIGN KEY (`diet_id`) REFERENCES `diet` (`diet_i
 
 ALTER TABLE `recipe_style` ADD FOREIGN KEY (`style_id`) REFERENCES `style` (`style_id`);
 
-ALTER TABLE `recipe_style` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
+ALTER TABLE `recipe_style` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`);
 
-ALTER TABLE `recipe_diet` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
+ALTER TABLE `recipe_diet` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`);
 
 ALTER TABLE `recipe` ADD FOREIGN KEY (`measurement_id`) REFERENCES `measurement` (`measurement_id`);
 
 ALTER TABLE `recipe` ADD FOREIGN KEY (`visibility_id`) REFERENCES `visibility` (`visibility_id`);
 
-ALTER TABLE `comment` ADD FOREIGN KEY (`commenter_user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `comment` ADD FOREIGN KEY (`commenter_user_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `comment` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
+ALTER TABLE `comment` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`);
 
-ALTER TABLE `follow` ADD FOREIGN KEY (`following_user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `follow` ADD FOREIGN KEY (`following_user_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `follow` ADD FOREIGN KEY (`followed_user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `follow` ADD FOREIGN KEY (`followed_user_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `video` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
+ALTER TABLE `video` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`);
+
+
+DROP USER IF EXISTS 'grubUser'@'localhost';
+
+CREATE USER grubUser@localhost
+IDENTIFIED BY 'Nomnom123!';
+
+GRANT SELECT, INSERT, DELETE, UPDATE
+ON grub2.*
+TO grubUser@localhost;

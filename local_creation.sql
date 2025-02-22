@@ -10,7 +10,7 @@ CREATE TABLE `user` (
   `email_address` varchar(100) UNIQUE NOT NULL,
   `password_hash` varbinary(60) NOT NULL,
   `joined_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `role_id` tinyint NOT NULL,
+  `role_id` tinyint NOT NULL DEFAULT 1,
   `active` boolean NOT NULL DEFAULT 1
 );
 
@@ -28,7 +28,7 @@ CREATE TABLE `recipe` (
   `description` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `yield` decimal(10,2) UNSIGNED NOT NULL,
-  `yield_measurement_id` tinyint UNSIGNED NOT NULL,
+  `measurement_id` tinyint UNSIGNED NOT NULL,
   `servings` smallint UNSIGNED NOT NULL,
   `visibility_id` tinyint UNSIGNED NOT NULL,
 
@@ -170,7 +170,7 @@ ALTER TABLE `recipe_style` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`r
 
 ALTER TABLE `recipe_diet` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`);
 
-ALTER TABLE `recipe` ADD FOREIGN KEY (`yield_measurement_id`) REFERENCES `measurement` (`measurement_id`);
+ALTER TABLE `recipe` ADD FOREIGN KEY (`measurement_id`) REFERENCES `measurement` (`measurement_id`);
 
 ALTER TABLE `recipe` ADD FOREIGN KEY (`visibility_id`) REFERENCES `visibility` (`visibility_id`);
 
