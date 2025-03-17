@@ -16,12 +16,14 @@ INSERT INTO measurement VALUES
 (10, 'gram'),
 (11, 'kilogram'),
 (12, 'liter'),
-(13, 'milliliter');
+(13, 'milliliter'),
+(14, 'each'),
+(15, 'box');
 
 INSERT INTO visibility VALUES
 (1, 'private'),
 (2, 'public'),
-(3, 'friendsonly');
+(3, 'friends only');
 
 INSERT INTO diet VALUES
 (1, 'vegetarian'),

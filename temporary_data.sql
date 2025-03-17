@@ -25,9 +25,9 @@ SET @recipe_id = LAST_INSERT_ID();
 INSERT INTO ingredient (recipe_id, ingredient_line_item, quantity, ingredient_name, measurement_id, sort_order)
 VALUES
 (@recipe_id, 1, 2, 'Russet potatoes', 9, 1), -- 2 pounds of potatoes
-(@recipe_id, 2, 0, 'Salt', 1, 2),           -- 1 teaspoon of salt
+(@recipe_id, 2, 1, 'Salt', 1, 2),           -- 1 teaspoon of salt
 (@recipe_id, 3, 4, 'Butter', 8, 3),         -- 4 ounces of butter
-(@recipe_id, 4, 0, 'Black pepper', 1, 4),   -- 1 teaspoon of black pepper
+(@recipe_id, 4, 1, 'Black pepper', 1, 4),   -- 1 teaspoon of black pepper
 (@recipe_id, 5, 0.5, 'Milk', 3, 5);         -- 1/2 cup of milk
 
 -- Insert directions into the direction table

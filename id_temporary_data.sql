@@ -2,11 +2,11 @@
 
 -- 5 random users with NULL as the profile image. password_hash values use bcrypt-like placeholder hashes (hashed version of "password123")
 INSERT INTO `user` (username, profile_image_url, f_name, l_name, email_address, password_hash, joined_at, role_id, active) VALUES
-('johhnydoughboy', NULL, 'John', 'Doe', 'testuser1@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 2, 1),
-('JaSmithy', NULL, 'Jane', 'Smith', 'testuser2@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 2, 1),
-('dickdick', NULL, 'Richard', 'Johnson', 'testuser3@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 3, 1),
-('Emememememe', NULL, 'Emily', 'Davis', 'testuser4@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 1, 1),
-('MeowHiss', NULL, 'Chris', 'Brown', 'testuser5@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 2, 1);
+('johhnydoughboy', 'default_profile.webp', 'John', 'Doe', 'testuser1@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 2, 1),
+('JaSmithy', 'default_profile.webp', 'Jane', 'Smith', 'testuser2@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 2, 1),
+('dickdick', 'default_profile.webp', 'Richard', 'Johnson', 'testuser3@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 3, 1),
+('Emememememe', 'default_profile.webp', 'Emily', 'Davis', 'testuser4@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 1, 1),
+('MeowHiss', 'default_profile.webp', 'Chris', 'Brown', 'testuser5@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 2, 1);
 
 
 -- RECIPES FOR THE TABLES: RECIPE, INGREDIENT, AND DIRECTION
@@ -305,7 +305,7 @@ VALUES
 (@recipe_id, 9, 0.5, 'Hot sauce', 3, 9),  -- 1/2 cup hot sauce
 (@recipe_id, 10, 1, 'White vinegar', 2, 10),  -- 1 tablespoon white vinegar
 (@recipe_id, 11, 0.5, 'Worcestershire sauce', 2, 11),  -- 1/2 teaspoon Worcestershire sauce
-(@recipe_id, 12, 1, 'Vegetable oil (for frying)', 3, 12);  -- 1 cup for frying or spray for baking
+(@recipe_id, 12, 1, 'Vegetable oil (for frying)', 3, 12),  -- 1 cup for frying or spray for baking
 (@recipe_id, 13, 1, 'Cooking spray (for baking)', 3, 13);  -- 1 cup for frying or spray for baking
 
 -- Insert directions into the direction table
