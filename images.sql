@@ -1,3 +1,5 @@
+-- This script populates some default images for the recipes in the temporary_data.sql file.
+
 INSERT INTO `image` (`id`, `recipe_id`, `image_line_item`, `image_url`, `sort_order`) 
 VALUES 
 (NULL, '1', '1', 'default_recipe2.webp', '1'), 
