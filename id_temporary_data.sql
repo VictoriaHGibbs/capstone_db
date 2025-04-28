@@ -2,11 +2,11 @@
 
 -- 5 random users with NULL as the profile image. password_hash values use bcrypt-like placeholder hashes (hashed version of "password123")
 INSERT INTO `user` (username, profile_image_url, f_name, l_name, email_address, password_hash, joined_at, role_id, active) VALUES
-('johhnydoughboy', 'default_profile.webp', 'John', 'Doe', 'testuser1@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 2, 1),
-('JaSmithy', 'default_profile.webp', 'Jane', 'Smith', 'testuser2@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 2, 1),
-('dickdick', 'default_profile.webp', 'Richard', 'Johnson', 'testuser3@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 3, 1),
+('johhnydoughboy', 'default_profile.webp', 'John', 'Doe', 'testuser1@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 1, 1),
+('JaSmithy', 'default_profile.webp', 'Jane', 'Smith', 'testuser2@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 1, 1),
+('dickdick', 'default_profile.webp', 'Richard', 'Johnson', 'testuser3@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 1, 1),
 ('Emememememe', 'default_profile.webp', 'Emily', 'Davis', 'testuser4@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 1, 1),
-('MeowHiss', 'default_profile.webp', 'Chris', 'Brown', 'testuser5@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 2, 1);
+('MeowHiss', 'default_profile.webp', 'Chris', 'Brown', 'testuser5@example.com', UNHEX('2432612431322461314F4B74617A626C55693578714C397048444F565345354C6D70535651757574687269456D736E356441535639347953'), NOW(), 1, 1);
 
 
 -- RECIPES FOR THE TABLES: RECIPE, INGREDIENT, AND DIRECTION
@@ -124,7 +124,7 @@ VALUES
 (@recipe_id, 3, 1, 'Salt', 1, 3),  -- 1 teaspoon salt
 (@recipe_id, 4, 1, 'Granulated sugar', 2, 4),  -- 1 tablespoon sugar
 (@recipe_id, 5, 1.25, 'Milk', 3, 5),  -- 1 1/4 cups milk
-(@recipe_id, 6, 1, 'Egg', 8, 6),  -- 1 egg
+(@recipe_id, 6, 1, 'Egg', 16, 6),  -- 1 egg
 (@recipe_id, 7, 3, 'Butter, melted', 2, 7);  -- 3 tablespoons butter
 
 -- Insert directions into the direction table
@@ -159,7 +159,7 @@ VALUES
 -- Cheesecake Filling
 (@recipe_id, 3, 24, 'Cream cheese, softened', 8, 3),  -- 24 ounces cream cheese
 (@recipe_id, 4, 1.5, 'Granulated sugar', 3, 4),  -- 1.5 cups sugar
-(@recipe_id, 5, 3, 'Eggs', 8, 5),  -- 3 eggs
+(@recipe_id, 5, 3, 'Eggs', 16, 5),  -- 3 eggs
 (@recipe_id, 6, 1, 'Sour cream', 3, 6),  -- 1 cup sour cream
 (@recipe_id, 7, 2, 'Cocoa powder', 2, 7),  -- 2 tablespoons cocoa powder
 (@recipe_id, 8, 1, 'Vanilla extract', 2, 8),  -- 1 tablespoon vanilla extract
@@ -356,17 +356,3 @@ VALUES
 (@recipe_id, 6, 'Remove steaks from the grill and let them rest for 5 minutes before serving.', 6),
 (@recipe_id, 7, 'Drizzle grilled asparagus with lemon juice and sprinkle with Parmesan cheese.', 7),
 (@recipe_id, 8, 'Serve steaks with grilled asparagus on the side.', 8);
-
-
-
--- recipe for  --------------------------------------------------
-
-
-
-
-
-
-
-
--- recipe for  --------------------------------------------------
--- recipe for  --------------------------------------------------

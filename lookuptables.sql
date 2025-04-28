@@ -18,7 +18,8 @@ INSERT INTO measurement VALUES
 (12, 'liter'),
 (13, 'milliliter'),
 (14, 'each'),
-(15, 'box');
+(15, 'box'),
+(16, '');
 
 INSERT INTO visibility VALUES
 (1, 'private'),
@@ -30,13 +31,14 @@ INSERT INTO diet VALUES
 (2, 'vegan'),
 (3, 'keto'),
 (4, 'low-fat'),
-(5, 'low-sugar'),
+(5, 'no-sugar added'),
 (6, 'low-carb'),
 (7, 'mediterranean'),
 (8, 'heart healthy'),
 (9, 'raw'),
 (10, 'whole-food'),
-(11, 'gluten-free');
+(11, 'gluten-free'),
+(12, 'none');
 
 INSERT INTO style VALUES
 (1, 'american'),
@@ -59,7 +61,8 @@ INSERT INTO style VALUES
 (18, 'african'),
 (19, 'brazilian'),
 (20, 'tex-mex'),
-(21, 'fusion');
+(21, 'fusion'),
+(22, 'southern');
 
 
 INSERT INTO meal_type VALUES
@@ -78,5 +81,3 @@ INSERT INTO meal_type VALUES
 (13, 'salad'),
 (14, 'main course'),
 (15, 'late-night snack');
-
-

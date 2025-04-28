@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS grub2;
-USE grub2;
+CREATE DATABASE IF NOT EXISTS grub;
+USE grub;
 
 CREATE TABLE `user` (
   `id` int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -41,7 +41,7 @@ CREATE TABLE `ingredient` (
   `ingredient_line_item` tinyint UNSIGNED NOT NULL,
   `quantity` decimal(10,2) NOT NULL,
   `ingredient_name` varchar(50) NOT NULL,
-  `measurement_id` tinyint UNSIGNED NOT NULL,
+  `measurement_id` tinyint UNSIGNED,
   `sort_order` tinyint NOT NULL DEFAULT (`ingredient_line_item`),
     UNIQUE INDEX (`recipe_id`, `ingredient_line_item`)
 );
@@ -192,5 +192,5 @@ CREATE USER grubUser@localhost
 IDENTIFIED BY 'Nomnom123!';
 
 GRANT SELECT, INSERT, DELETE, UPDATE
-ON grub2.*
+ON grub.*
 TO grubUser@localhost;
